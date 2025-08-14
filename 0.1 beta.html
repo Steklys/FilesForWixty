@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wixty Firmwares</title>
+    <style>
+        :root {
+            --primary: #00ffaa;
+            --primary-dark: #00cc88;
+            --primary-light: #66ffcc;
+            --accent: #ff5500;
+            --dark: #111111;
+            --darker: #080808;
+            --light: #f0f0f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 170, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 85, 0, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .logo {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 100;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 15px rgba(0, 255, 170, 0.3);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+            font-style: italic;
+        }
+        
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px rgba(0, 255, 170, 0.3); }
+            100% { text-shadow: 0 0 20px rgba(255, 85, 0, 0.3); }
+        }
+        
+        nav {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            gap: 25px;
+            z-index: 90;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::before {
+            width: 100%;
+        }
+        
+        .glass {
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+        }
+        
+        .ascii-art {
+            color: var(--primary-light);
+            white-space: pre;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            text-align: center;
+            margin: 40px auto;
+            padding: 30px;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(8, 8, 8, 0.7);
+            border: 1px solid var(--primary);
+        }
+        
+        .ascii-art::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: scanline 4s linear infinite;
+        }
+        
+        @keyframes scanline {
+
+0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .product-card {
+            background: linear-gradient(145deg, rgba(21, 21, 21, 0.8), rgba(8, 8, 8, 0.9));
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 170, 0.15);
+            border-color: var(--primary);
+        }
+        
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 170, 0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        .product-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #111;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 255, 170, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 80px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        .downloads-section {
+            margin-top: 80px;
+        }
+
+        .versions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .versions-table th, .versions-table td {
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .versions-table th {
+            background: rgba(0, 255, 170, 0.1);
+            color: var(--primary-light);
+        }
+
+        .about-section {
+            margin-top: 80px;
+            padding: 40px 0;
+        }
+
+        .about-section h2 {
+            color: var(--primary-light);
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* Стиль для кликабельной версии */
+        .download-version {
+            cursor: pointer;
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 2px 0;
+            border-bottom: 1px solid rgba(0, 255, 170, 0.3);
+        }
+
+        .download-version:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <span class="logo-text">Wixty Firmwares</span>
+    </div>
+    
+    <nav>
+        <a href="#" id="home-link">Home</a>
+        <a href="#downloads-section" id="downloads-link">Downloads</a>
+        <a href="#about-section" id="about-link">About us</a>
+    </nav>
+    
+    <div class="container">
+        <div class="ascii-art glass">
+------------------------------------------
+    
+ \ \ /\ / / | |  \ V /  |_____| \ \_/ / 
+  \ V  V /  | |   > <     | |    \   /  
+   \_/\_/   |_|  /_/\_\   |_|     |_|   
+                                               
+                FIRMWARES
+------------------------------------------
+
+</div>
+        
+        <h1 style="text-align: center; margin-bottom: 20px; color: var(--primary-light);">Advanced Firmware Utilities</h1>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 40px; color: rgba(255,255,255,0.7); line-height: 1.6;">
+            Premium firmware tools for power users. Unlock hidden potential of your devices with our professional-grade utilities.
+        </p>
+        
+        <div style="text-align: center; margin-bottom: 60px;">
+            <a href="#downloads-section" class="btn">Download Now</a>
+        </div>
+        
+        <div class="products">
+            <div class="product-card glass">
+                <h3 class="product-title">FIRMWARE TOOLKIT PRO</h3>
+                <p class="product-desc">Complete solution for firmware modification and analysis. Supports all major hardware platforms.</p>
+                <a href="#downloads-section" class="btn">Download</a>
+            </div>
+            
+            <div class="product-card glass">
+                <h3 class="product-title">DRIVER UNLOCKER</h3>
+                <p class="product-desc">Remove manufacturer restrictions and unlock full hardware capabilities.</p>
+                <a href="#downloads-section" class="btn">Download</a>
+            </div>
+            
+            <div class="product-card glass">
+                <h3 class="product-title">BOOTLOADER KIT</h3>
+                <p class="product-desc">Advanced tools for bootloader modification and custom ROM installation.</p>
+                <a href="#downloads-section" class="btn">Download</a>
+            </div>
+        </div>
+
+        <div class="downloads-section" id="downloads-section">
+            <h2 style="text-align: center; color: var(--primary-light); margin-bottom: 30px;">Downloads</h2>
+            <table class="versions-table glass">
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Size</th>
+                        <th>Supported</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://github.com/Steklys/Wixty-" class="download-version" target="_blank">Shadow v1.0.0</a></td>
+                        <td>2025-09-08</td>
+                        <td>15.7 MB</td>
+                        <td>All USBs with 2 GB of memory and NTFS or FAT32 format</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="about-section" id="about-section">
+            <h2 style="text-align: center; color: var(--primary-light);">About Us</h2>
+            <div class="glass" style="padding: 30px; margin-top: 30px;">
+                <p>Wixty Firmwares is a team of firmware and reverse engineering engineers that aims to push hardware beyond its manufacturer's limitations.</p>
+                <p>Founded in 2025, we provide professional computer files to enthusiasts and developers worldwide.</p>
+                <p>Our mission is to democratize hardware access and enable true ownership of devices through advanced firmware solutions.</p>
+                <p style="margin-top: 20px;"><strong>Contact:</strong> @wantdiesmch (telegram)</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="glass">
+        <p>© 2025 Wixty Firmwares. All rights reserved.</p>
+        <p style="margin-top: 10px;">Not affiliated with any hardware manufacturers.</p>
+    </footer>
+    
+    <script>
+        // Анимация для ASCII арта
+        const asciiArt = document.querySelector('.ascii-art');
+        setInterval(() => {
+            const hue = Math.sin(Date.now() / 3000) * 60 + 160;
+            asciiArt.style.color = hsl(${hue}, 100%, 70%);
+        }, 50);
+        
+        // Анимация при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.product-card, .ascii-art, .btn');
+            
+            elements.forEach((el, i) => {
+
+setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 * i);
+                
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+
+            // Прокрутка к верху для Home
+            document.getElementById('home-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
