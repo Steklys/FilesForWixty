@@ -160,6 +160,10 @@
             border: 1px solid rgba(0, 255, 170, 0.2);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .product-card:hover {
@@ -187,6 +191,12 @@
             font-weight: 700;
         }
         
+        .product-desc {
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.7);
+        }
+        
         .btn {
             display: inline-block;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -201,6 +211,8 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 255, 170, 0.3);
+            margin-top: auto;
+            align-self: flex-start;
         }
         
         footer {
@@ -215,17 +227,25 @@
             margin-top: 80px;
         }
 
+        .version-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
         .versions-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 30px;
             color: rgba(255,255,255,0.7);
+            table-layout: fixed;
+            flex-grow: 1;
         }
 
         .versions-table th, .versions-table td {
             border: 1px solid rgba(0, 255, 170, 0.2);
             padding: 12px;
             text-align: left;
+            word-wrap: break-word;
         }
 
         .versions-table th {
@@ -233,9 +253,39 @@
             color: var(--primary-light);
         }
 
+        .versions-table th:nth-child(1) { width: 20%; }
+        .versions-table th:nth-child(2) { width: 15%; }
+        .versions-table th:nth-child(3) { width: 15%; }
+        .versions-table th:nth-child(4) { width: 50%; }
+
+        /* –°—Ç–∏–ª—å –¥–ª—è –∫–Ω–æ–ø–∫–∏-–∏–∫–æ–Ω–∫–∏ */
+        .info-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--dark);
+            font-weight: bold;
+            font-size: 16px;
+            margin-left: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .info-btn:hover {
+            background: var(--primary-light);
+            transform: scale(1.1);
+        }
+
         .about-section {
             margin-top: 80px;
-            padding: 40px 0;
+
+padding: 40px 0;
         }
 
         .about-section h2 {
@@ -248,7 +298,6 @@
             line-height: 1.6;
         }
 
-        /* —ÚËÎ¸ ‰Îˇ ÍÎËÍ‡·ÂÎ¸ÌÓÈ ‚ÂÒËË */
         .download-version {
             cursor: pointer;
             color: var(--primary-light);
@@ -299,19 +348,19 @@
         </div>
         
         <div class="products">
-            <div class="product-card glass">
+            <div class="product-card glass" onclick="window.location.href='#downloads-section'">
                 <h3 class="product-title">FIRMWARE TOOLKIT PRO</h3>
                 <p class="product-desc">Complete solution for firmware modification and analysis. Supports all major hardware platforms.</p>
                 <a href="#downloads-section" class="btn">Download</a>
             </div>
             
-            <div class="product-card glass">
+            <div class="product-card glass" onclick="window.location.href='#downloads-section'">
                 <h3 class="product-title">DRIVER UNLOCKER</h3>
                 <p class="product-desc">Remove manufacturer restrictions and unlock full hardware capabilities.</p>
                 <a href="#downloads-section" class="btn">Download</a>
             </div>
             
-            <div class="product-card glass">
+            <div class="product-card glass" onclick="window.location.href='#downloads-section'">
                 <h3 class="product-title">BOOTLOADER KIT</h3>
                 <p class="product-desc">Advanced tools for bootloader modification and custom ROM installation.</p>
                 <a href="#downloads-section" class="btn">Download</a>
@@ -320,30 +369,108 @@
 
         <div class="downloads-section" id="downloads-section">
             <h2 style="text-align: center; color: var(--primary-light); margin-bottom: 30px;">Downloads</h2>
-            <table class="versions-table glass">
-                <thead>
-                    <tr>
-                        <th>Version</th>
-                        <th>Date</th>
-                        <th>Size</th>
-                        <th>Supported</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="https://github.com/Steklys/Wixty-" class="download-version" target="_blank">Shadow v1.0.0</a></td>
-                        <td>2025-09-08</td>
-                        <td>15.7 MB</td>
-                        <td>All USBs with 2 GB of memory and NTFS or FAT32 format</td>
-                    </tr>
-                </tbody>
-            </table>
+            
+            <div class="versions-container">
+                <!-- –ü–µ—Ä–≤–∞—è –≤–µ—Ä—Å–∏—è -->
+                <div class="version-item">
+                    <table class="versions-table glass">
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Date</th>
+                                <th>Size</th>
+                                <th>Supported</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="https://github.com/Steklys/Wixty-" class="download-version" target="_blank">Shadow v1.0.0</a></td>
+                                <td>2025-09-08</td>
+
+<td>15.7 MB</td>
+                                <td>All USBs with 2 GB of memory and NTFS or FAT32 format</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="https://github.com/Steklys/Wixty-/blob/main/about%20the%20%22Shadow%22%20firmware" class="info-btn" target="_blank">?</a>
+                </div>
+                
+                <!-- –í—Ç–æ—Ä–∞—è –≤–µ—Ä—Å–∏—è -->
+                <div class="version-item">
+                    <table class="versions-table glass">
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Date</th>
+                                <th>Size</th>
+                                <th>Supported</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="https://github.com/Steklys/Wixty-" class="download-version" target="_blank">Phantom v1.0.0</a></td>
+                                <td>2025-10-15</td>
+                                <td>18.2 MB</td>
+                                <td>All USBs with 4 GB+ memory, exFAT supported</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="https://github.com/Steklys/Wixty-" class="info-btn" target="_blank">?</a>
+                </div>
+                
+                <!-- –¢—Ä–µ—Ç—å—è –≤–µ—Ä—Å–∏—è -->
+                <div class="version-item">
+                    <table class="versions-table glass">
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Date</th>
+                                <th>Size</th>
+                                <th>Supported</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="https://github.com/Steklys/Wixty-" class="download-version" target="_blank">Ghost v1.0.0</a></td>
+                                <td>2025-11-20</td>
+                                <td>22.5 MB</td>
+                                <td>Advanced version with SSD support</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="https://github.com/Steklys/Wixty-" class="info-btn" target="_blank">?</a>
+                </div>
+                
+                <!-- –ß–µ—Ç–≤–µ—Ä—Ç–∞—è –≤–µ—Ä—Å–∏—è -->
+                <div class="version-item">
+                    <table class="versions-table glass">
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Date</th>
+                                <th>Size</th>
+                                <th>Supported</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="https://github.com/Steklys/Wixty-" class="download-version" target="_blank">Specter v1.0.0</a></td>
+                                <td>2025-12-05</td>
+                                <td>25.0 MB</td>
+                                <td>Enterprise edition with RAID support</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="https://github.com/Steklys/Wixty-" class="info-btn" target="_blank">?</a>
+                </div>
+            </div>
         </div>
 
         <div class="about-section" id="about-section">
             <h2 style="text-align: center; color: var(--primary-light);">About Us</h2>
             <div class="glass" style="padding: 30px; margin-top: 30px;">
-                <p>Wixty Firmwares is a team of firmware and reverse engineering engineers that aims to push hardware beyond its manufacturer's limitations.</p>
+
+<p>Wixty Firmwares is a team of firmware and reverse engineering engineers that aims to push hardware beyond its manufacturer's limitations.</p>
                 <p>Founded in 2025, we provide professional computer files to enthusiasts and developers worldwide.</p>
                 <p>Our mission is to democratize hardware access and enable true ownership of devices through advanced firmware solutions.</p>
                 <p style="margin-top: 20px;"><strong>Contact:</strong> @wantdiesmch (telegram)</p>
@@ -352,25 +479,24 @@
     </div>
     
     <footer class="glass">
-        <p>© 2025 Wixty Firmwares. All rights reserved.</p>
+        <p>¬© 2025 Wixty Firmwares. All rights reserved.</p>
         <p style="margin-top: 10px;">Not affiliated with any hardware manufacturers.</p>
     </footer>
     
     <script>
-        // ¿ÌËÏ‡ˆËˇ ‰Îˇ ASCII ‡Ú‡
+        // –ê–Ω–∏–º–∞—Ü–∏—è –¥–ª—è ASCII –∞—Ä—Ç–∞
         const asciiArt = document.querySelector('.ascii-art');
         setInterval(() => {
             const hue = Math.sin(Date.now() / 3000) * 60 + 160;
             asciiArt.style.color = hsl(${hue}, 100%, 70%);
         }, 50);
         
-        // ¿ÌËÏ‡ˆËˇ ÔË Á‡„ÛÁÍÂ
+        // –ê–Ω–∏–º–∞—Ü–∏—è –ø—Ä–∏ –∑–∞–≥—Ä—É–∑–∫–µ
         document.addEventListener('DOMContentLoaded', () => {
             const elements = document.querySelectorAll('.product-card, .ascii-art, .btn');
             
             elements.forEach((el, i) => {
-
-setTimeout(() => {
+                setTimeout(() => {
                     el.style.opacity = '1';
                     el.style.transform = 'translateY(0)';
                 }, 100 * i);
@@ -380,7 +506,7 @@ setTimeout(() => {
                 el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             });
 
-            // œÓÍÛÚÍ‡ Í ‚ÂıÛ ‰Îˇ Home
+            // –ü—Ä–æ–∫—Ä—É—Ç–∫–∞ –∫ –≤–µ—Ä—Ö—É –¥–ª—è Home
             document.getElementById('home-link').addEventListener('click', (e) => {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
